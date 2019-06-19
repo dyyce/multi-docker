@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t taraspyoneer/react-test -f ./client/Dockerfile.dev
+
+script:
+  - docker run taraspyoneer/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t taraspyoneer/multi-client ./client
+  - docker build -t taraspyoneer/multi-nginx ./nginx
+  - docker build -t taraspyoneer/multi-server ./server
+  - docker build -t taraspyoneer/multi-worker ./worker
