@@ -5,8 +5,8 @@ services:
 before_install:
   - docker build -t taraspyoneer/react-test -f ./client/Dockerfile.dev ./client
 
-script:
-  - docker run taraspyoneer/react-test npm test -- --coverage
+# script:
+#   - docker run taraspyoneer/react-test npm test -- --coverage
 
 after_success:
   - docker build -t taraspyoneer/multi-client ./client
